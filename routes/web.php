@@ -26,7 +26,10 @@ Route::get('/', function () {
 });
 
 Route::get('/chirps', function () {
-    return Inertia::render('Chirps/Index');
+    return Inertia::render('Chirps/Index', [
+        'subtitle' => 'From PHP to JS',
+        'title' => 'Chirps Index'
+    ]);
 });
 
 Route::get('/dashboard', function () {

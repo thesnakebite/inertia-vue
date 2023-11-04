@@ -1,3 +1,19 @@
+<script setup>
+    import MyLayout from '@/Layouts/MyLayout.vue'
+
+    defineProps([
+        'subtitle',
+        'title'
+    ])
+</script>
+
 <template>
-    <h1>Chirps Index</h1>
+
+    <MyLayout>
+        <template #title>
+            <h1>{{ title }}</h1>
+        </template>
+
+        <h2>{{ subtitle }}</h2>
+    </MyLayout>
 </template>
