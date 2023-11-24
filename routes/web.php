@@ -30,7 +30,7 @@ Route::get('/chirps', function () {
         'subtitle' => 'From PHP to JS',
         'title' => 'Chirps Index'
     ]);
-})->middleware('auth');
+})->middleware('auth')->name('chirps.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
