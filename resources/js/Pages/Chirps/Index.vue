@@ -17,6 +17,9 @@
                 console.log(res.data);
                 message.value= ''
             })
+            .catch( (error) => {
+                console.log(error.response.data.message)
+            })
     }  
 </script>
 
