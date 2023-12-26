@@ -3,6 +3,7 @@
     import { Head } from '@inertiajs/vue3';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import { ref } from 'vue';
+    import InputError from '@/Components/InputError.vue';
 
     defineProps([
         'title',
@@ -11,6 +12,8 @@
 
     const message = ref('')
 
+    const errors = ref({})
+
     function submit() {
         axios.post(route('chirps.store'), {message: message.value})
             .then((res) => {
@@ -18,6 +21,11 @@
                 message.value= ''
             })
             .catch( (error) => {
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors
+                    return
+                }
+
                 console.log(error.response.data.message)
             })
     }  
@@ -42,6 +50,12 @@
                                       placeholder="What's on you mind?"
                             >
                             </textarea>
+
+                            <!-- Error -->
+                            <!-- <div v-if="errors.message" class="text-red-500 text-xs mt-1">
+                                {{ errors.message[0] }}
+                            </div> -->
+                            <InputError :message="errors.message && errors.message[0]" class="mt-1" />
                             <PrimaryButton focusRingClass="focus:ring-emerald-500" class="mt-6">Chirps</PrimaryButton>
                         </form>
                     </div>
